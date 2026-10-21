@@ -434,10 +434,10 @@ export const ChatSection: React.FC<ChatSectionProps> = ({
         </div>
 
         {/* Message Stream (Selector 2) */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5 bg-[#0D101A] overscroll-contain">
+        <div className="flex-1 min-h-0 overflow-y-auto p-3 sm:p-6 space-y-4 sm:space-y-5 bg-[#0D101A] overscroll-contain">
           
           {/* Trust & Mutual Elo Badge */}
-          <div className="p-3 rounded-2xl bg-[#141724]/90 border border-zinc-800/80 text-center max-w-md mx-auto shadow-sm">
+          <div className="p-3 rounded-2xl bg-[#141724]/90 border border-zinc-800/80 text-center w-full max-w-md mx-auto shadow-sm">
             <div className="flex items-center justify-center gap-1.5 text-xs font-bold text-emerald-400 mb-0.5">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Elo Realizado com Sucesso · Canal Criptografado</span>
@@ -455,7 +455,7 @@ export const ChatSection: React.FC<ChatSectionProps> = ({
                 key={msg.id}
                 className={`flex flex-col group ${isMine ? 'items-end' : 'items-start'}`}
               >
-                <div className={`flex items-end gap-2.5 max-w-[85%] sm:max-w-[75%] ${isMine ? 'flex-row-reverse' : 'flex-row'}`}>
+                <div className={`flex items-end gap-2 max-w-[95%] sm:max-w-[75%] min-w-0 ${isMine ? 'flex-row-reverse' : 'flex-row'}`}>
                   
                   {/* Tiny Avatar */}
                   <div className="w-7 h-7 rounded-full overflow-hidden shrink-0 ring-1 ring-zinc-700 mb-5">
@@ -468,7 +468,7 @@ export const ChatSection: React.FC<ChatSectionProps> = ({
                   </div>
 
                   {/* Bubble Container */}
-                  <div className="flex flex-col">
+                  <div className="flex flex-col min-w-0 max-w-[calc(100%_-_2.25rem)]">
                     
                     {/* Message Bubble */}
                     <div className={`p-4 rounded-3xl transition-all shadow-md relative ${
@@ -486,7 +486,7 @@ export const ChatSection: React.FC<ChatSectionProps> = ({
 
                       {/* Text content */}
                       {msg.type === 'text' && (
-                        <p className="text-xs sm:text-sm leading-relaxed whitespace-pre-wrap">
+                        <p className="text-xs sm:text-sm leading-relaxed whitespace-pre-wrap break-words">
                           {msg.text}
                         </p>
                       )}
@@ -627,8 +627,8 @@ export const ChatSection: React.FC<ChatSectionProps> = ({
         )}
 
         {/* Bottom Input Composer */}
-        <div className="p-3 sm:p-4 border-t border-purple-950/40 bg-[#0C0F1D]">
-          <form onSubmit={handleSendText} className="flex items-center gap-2 sm:gap-3">
+        <div className="p-2.5 sm:p-4 border-t border-purple-950/40 bg-[#0C0F1D] shrink-0">
+          <form onSubmit={handleSendText} className="flex items-center gap-1.5 sm:gap-3 min-w-0">
             
             {/* Hidden File Input */}
             <input
@@ -640,7 +640,7 @@ export const ChatSection: React.FC<ChatSectionProps> = ({
             />
 
             {/* Left Tool Stack: File Attachment & Camera */}
-            <div className="flex items-center gap-1 sm:gap-1.5 text-zinc-400">
+            <div className="flex items-center gap-0.5 sm:gap-1.5 text-zinc-400 shrink-0">
               {/* Document / File attachment */}
               <button
                 type="button"
@@ -669,15 +669,15 @@ export const ChatSection: React.FC<ChatSectionProps> = ({
               value={inputText}
               disabled={isRecording}
               onChange={(e) => setInputText(e.target.value)}
-              className="flex-1 bg-[#11162B] text-xs sm:text-sm text-zinc-100 placeholder-zinc-500 rounded-2xl px-4 py-3 border border-purple-950/40 focus:border-purple-500/70 focus:outline-none transition-colors"
+              className="min-w-0 flex-1 bg-[#11162B] text-xs sm:text-sm text-zinc-100 placeholder-zinc-500 rounded-2xl px-3 sm:px-4 py-3 border border-purple-950/40 focus:border-purple-500/70 focus:outline-none transition-colors"
             />
 
             {/* Right Tools: Emoji + Send Button */}
-            <div className="flex items-center gap-1.5 sm:gap-2">
+            <div className="flex items-center gap-0.5 sm:gap-2 shrink-0">
               <button
                 type="button"
                 onClick={() => setInputText(prev => prev + ' 🚀')}
-                className="p-2 sm:p-2.5 rounded-xl text-zinc-400 hover:text-white hover:bg-[#11162B] transition-colors"
+                className="hidden sm:block p-2.5 rounded-xl text-zinc-400 hover:text-white hover:bg-[#11162B] transition-colors"
                 title="Inserir Emoji"
               >
                 <Smile className="w-4 h-4" />

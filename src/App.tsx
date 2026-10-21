@@ -401,7 +401,7 @@ export default function App() {
       />
 
       {/* Main Content Viewport */}
-      <main className={activeTab === 'chat' ? 'h-[calc(100dvh-64px)] md:h-[calc(100vh-64px)] pb-16 md:pb-0 overflow-hidden relative' : 'min-h-[calc(100vh-64px)] pb-16 md:pb-6 relative'}>
+      <main className={activeTab === 'chat' ? 'h-[calc(100dvh-64px)] md:h-[calc(100vh-64px)] overflow-hidden relative' : 'min-h-[calc(100vh-64px)] pb-16 md:pb-6 relative'}>
         {activeTab === 'feed' && (
           <FeedSection
             posts={posts}
@@ -447,7 +447,7 @@ export default function App() {
         )}
 
         {activeTab === 'chat' && (
-          <div className="w-full h-full min-h-0 p-1 sm:p-2.5 overflow-hidden">
+          <div className="w-full h-[calc(100dvh-128px)] md:h-full min-h-0 p-1 sm:p-2.5 overflow-hidden">
             <ChatSection
               threads={threads}
               activeThreadId={activeThreadId}
