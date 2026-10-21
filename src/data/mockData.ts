@@ -6,7 +6,7 @@ export const CURRENT_FOUNDER_USER: UserProfile = {
   handle: '@camilasrocha',
   role: 'startup',
   headline: 'Co-fundadora & CEO na OmniFlow AI · Ex-iFood Tech Lead',
-  avatar: '/src/assets/images/avatar_founder_camila_1792400686938.jpg',
+  avatar: '/assets/images/avatar_founder_camila_1792400686938.jpg',
   location: 'São Paulo, SP (Híbrido)',
   niches: ['AI & B2B SaaS', 'Logtech & Supply'],
   experience: ['Ex-BigTech / Unicornio', 'Serial Founder (Exits)'],
@@ -29,7 +29,7 @@ export const CURRENT_FOUNDER_USER: UserProfile = {
     title: 'OmniFlow AI: Orquestração Autônoma de Supply Chain B2B',
     duration: '02:14',
     viewsCount: 1420,
-    thumbnail: '/src/assets/images/startup_showcase_tech_1792400689208.jpg',
+    thumbnail: '/assets/images/startup_showcase_tech_1792400689208.jpg',
     speakerName: 'Camila Rocha',
     speakerRole: 'CEO & Co-fundadora',
     keyProblem: '40% do tempo de procurement é perdido em conferências manuais de pedidos.',
@@ -44,7 +44,7 @@ export const CURRENT_FOUNDER_USER: UserProfile = {
       authorId: 'user-rodrigo',
       authorName: 'Rodrigo Mendes',
       authorRole: 'General Partner · Nexa Horizons VC',
-      authorAvatar: '/src/assets/images/avatar_investor_rodrigo_1792400687856.jpg',
+      authorAvatar: '/assets/images/avatar_investor_rodrigo_1792400687856.jpg',
       targetId: 'user-camila',
       rating: 5,
       comment: 'A Camila tem uma capacidade de execução e clareza de métricas raras no ecossistema. Co-investi na fase anjo e o crescimento de MRR foi impressionante trimestre a trimestre.',
@@ -93,7 +93,7 @@ export const CURRENT_INVESTOR_USER: UserProfile = {
   handle: '@rodrigo_vc',
   role: 'investor',
   headline: 'General Partner na Nexa Horizons · Early Stage VC LatAm',
-  avatar: '/src/assets/images/avatar_investor_rodrigo_1792400687856.jpg',
+  avatar: '/assets/images/avatar_investor_rodrigo_1792400687856.jpg',
   location: 'São Paulo & San Francisco',
   niches: ['AI & B2B SaaS', 'Fintech', 'Healthtech'],
   experience: ['10+ anos no mercado corporativo', 'Ex-BigTech / Unicornio'],
@@ -118,7 +118,7 @@ export const CURRENT_INVESTOR_USER: UserProfile = {
       authorId: 'user-camila',
       authorName: 'Camila Rocha',
       authorRole: 'CEO na OmniFlow AI',
-      authorAvatar: '/src/assets/images/avatar_founder_camila_1792400686938.jpg',
+      authorAvatar: '/assets/images/avatar_founder_camila_1792400686938.jpg',
       targetId: 'user-rodrigo',
       rating: 5,
       comment: 'O Rodrigo é a definição de Smart Money. Abriu portas com 3 dos nossos maiores clientes corporativos e nos ajudou a redesenhar a precificação da rodada.',
@@ -218,7 +218,7 @@ export const MOCK_PROFILES_LIST: UserProfile[] = [
         authorId: 'user-rodrigo',
         authorName: 'Rodrigo Mendes',
         authorRole: 'Nexa Horizons',
-        authorAvatar: '/src/assets/images/avatar_investor_rodrigo_1792400687856.jpg',
+        authorAvatar: '/assets/images/avatar_investor_rodrigo_1792400687856.jpg',
         targetId: 'user-gabriel-pulso',
         rating: 5,
         comment: 'Solução validada diretamente no chão de hospital com retenção de 98% dos médicos cadastrados.',
@@ -389,7 +389,7 @@ export const INITIAL_EVENTS: EventItem[] = [
     time: '18:30 - 21:30 BRT',
     location: 'São Paulo, SP (Presencial) + Live Stream',
     format: 'Híbrido',
-    bannerImage: '/src/assets/images/event_demoday_stage_1792400689479.jpg',
+    bannerImage: '/assets/images/event_demoday_stage_1792400689479.jpg',
     description: 'Apresentação exclusiva de 12 startups em estágio Seed selecionadas nos setores de AI Empresarial, Clima e Fintech. Sessão de perguntas diretas com mais de 80 VCs e investidores anjo confirmados.',
     niches: ['AI & B2B SaaS', 'Fintech', 'Cleantech & Clima'],
     rsvpsCount: 142,
@@ -402,14 +402,14 @@ export const INITIAL_EVENTS: EventItem[] = [
         id: 'user-rodrigo',
         name: 'Rodrigo Mendes',
         role: 'investor',
-        avatar: '/src/assets/images/avatar_investor_rodrigo_1792400687856.jpg',
+        avatar: '/assets/images/avatar_investor_rodrigo_1792400687856.jpg',
         companyOrFund: 'Nexa Horizons VC'
       },
       {
         id: 'user-camila',
         name: 'Camila Rocha',
         role: 'startup',
-        avatar: '/src/assets/images/avatar_founder_camila_1792400686938.jpg',
+        avatar: '/assets/images/avatar_founder_camila_1792400686938.jpg',
         companyOrFund: 'OmniFlow AI'
       },
       {
@@ -434,8 +434,8 @@ export const INITIAL_EVENTS: EventItem[] = [
       { time: '20:40 - 21:30', title: 'Cocktail de Networking Presencial e Breakout Rooms Virtuais' }
     ],
     featuredSpeakers: [
-      { name: 'Rodrigo Mendes', role: 'General Partner na Nexa Horizons', avatar: '/src/assets/images/avatar_investor_rodrigo_1792400687856.jpg' },
-      { name: 'Camila Rocha', role: 'Founder & CEO na OmniFlow AI', avatar: '/src/assets/images/avatar_founder_camila_1792400686938.jpg' }
+      { name: 'Rodrigo Mendes', role: 'General Partner na Nexa Horizons', avatar: '/assets/images/avatar_investor_rodrigo_1792400687856.jpg' },
+      { name: 'Camila Rocha', role: 'Founder & CEO na OmniFlow AI', avatar: '/assets/images/avatar_founder_camila_1792400686938.jpg' }
     ]
   },
   {
@@ -460,7 +460,7 @@ export const INITIAL_EVENTS: EventItem[] = [
         id: 'user-rodrigo',
         name: 'Rodrigo Mendes',
         role: 'investor',
-        avatar: '/src/assets/images/avatar_investor_rodrigo_1792400687856.jpg',
+        avatar: '/assets/images/avatar_investor_rodrigo_1792400687856.jpg',
         companyOrFund: 'Nexa Horizons VC'
       },
       {
@@ -536,7 +536,7 @@ export const INITIAL_EVENTS: EventItem[] = [
         id: 'user-rodrigo',
         name: 'Rodrigo Mendes',
         role: 'investor',
-        avatar: '/src/assets/images/avatar_investor_rodrigo_1792400687856.jpg',
+        avatar: '/assets/images/avatar_investor_rodrigo_1792400687856.jpg',
         companyOrFund: 'Nexa Horizons VC'
       }
     ],
@@ -600,7 +600,7 @@ export const INITIAL_EVENTS: EventItem[] = [
         id: 'user-camila',
         name: 'Camila Rocha',
         role: 'startup',
-        avatar: '/src/assets/images/avatar_founder_camila_1792400686938.jpg',
+        avatar: '/assets/images/avatar_founder_camila_1792400686938.jpg',
         companyOrFund: 'OmniFlow AI'
       }
     ],
@@ -631,7 +631,7 @@ export const INITIAL_EVENTS: EventItem[] = [
         id: 'user-rodrigo',
         name: 'Rodrigo Mendes',
         role: 'investor',
-        avatar: '/src/assets/images/avatar_investor_rodrigo_1792400687856.jpg',
+        avatar: '/assets/images/avatar_investor_rodrigo_1792400687856.jpg',
         companyOrFund: 'Nexa Horizons VC'
       }
     ],
@@ -734,7 +734,7 @@ export const INITIAL_EVENTS: EventItem[] = [
         id: 'user-rodrigo',
         name: 'Rodrigo Mendes',
         role: 'investor',
-        avatar: '/src/assets/images/avatar_investor_rodrigo_1792400687856.jpg',
+        avatar: '/assets/images/avatar_investor_rodrigo_1792400687856.jpg',
         companyOrFund: 'Nexa Horizons VC'
       }
     ],
@@ -784,13 +784,13 @@ export const INITIAL_POSTS: Post[] = [
     userLiked: true,
     commentsCount: 22,
     sharesCount: 31,
-    mediaUrl: '/src/assets/images/startup_showcase_tech_1792400689208.jpg',
+    mediaUrl: '/assets/images/startup_showcase_tech_1792400689208.jpg',
     mediaType: 'video',
     videoPitch: {
       title: 'OmniFlow AI: Orquestração Autônoma de Supply Chain B2B',
       duration: '02:14',
       viewsCount: 1420,
-      thumbnail: '/src/assets/images/startup_showcase_tech_1792400689208.jpg',
+      thumbnail: '/assets/images/startup_showcase_tech_1792400689208.jpg',
       speakerName: 'Camila Rocha',
       speakerRole: 'CEO & Co-fundadora (Ex-iFood)',
       keyProblem: '40% do tempo de procurement é perdido em conferências manuais e cotações repetitivas.',
@@ -887,7 +887,7 @@ export const INITIAL_NOTIFICATIONS: AppNotification[] = [
     timestamp: 'Há 10 minutos',
     read: false,
     targetId: 'user-rodrigo',
-    actorAvatar: '/src/assets/images/avatar_investor_rodrigo_1792400687856.jpg'
+    actorAvatar: '/assets/images/avatar_investor_rodrigo_1792400687856.jpg'
   },
   {
     id: 'notif-2',
@@ -964,7 +964,7 @@ export const INITIAL_CHAT_THREADS: ChatThread[] = [
         id: 'msg-ac-2',
         senderId: 'user-camila',
         senderName: 'Camila Rocha',
-        senderAvatar: '/src/assets/images/avatar_founder_camila_1792400686938.jpg',
+        senderAvatar: '/assets/images/avatar_founder_camila_1792400686938.jpg',
         timestamp: '14:38',
         text: 'Obrigada Aris! A automação dos fluxos de compras reduziu o ciclo de vendas e já temos 142% de retenção líquida de receita.',
         type: 'text'
@@ -973,7 +973,7 @@ export const INITIAL_CHAT_THREADS: ChatThread[] = [
         id: 'msg-ac-3',
         senderId: 'user-camila',
         senderName: 'Camila Rocha',
-        senderAvatar: '/src/assets/images/avatar_founder_camila_1792400686938.jpg',
+        senderAvatar: '/assets/images/avatar_founder_camila_1792400686938.jpg',
         timestamp: '14:40',
         type: 'file',
         fileData: {
@@ -995,7 +995,7 @@ export const INITIAL_CHAT_THREADS: ChatThread[] = [
         id: 'msg-ac-5',
         senderId: 'user-camila',
         senderName: 'Camila Rocha',
-        senderAvatar: '/src/assets/images/avatar_founder_camila_1792400686938.jpg',
+        senderAvatar: '/assets/images/avatar_founder_camila_1792400686938.jpg',
         timestamp: '14:44',
         text: 'Muito obrigado! Vamos avançar. 👏',
         type: 'text'
@@ -1047,7 +1047,7 @@ export const INITIAL_CHAT_THREADS: ChatThread[] = [
         id: 'msg-jm-2',
         senderId: 'user-camila',
         senderName: 'Camila Rocha',
-        senderAvatar: '/src/assets/images/avatar_founder_camila_1792400686938.jpg',
+        senderAvatar: '/assets/images/avatar_founder_camila_1792400686938.jpg',
         timestamp: '10:52',
         text: 'Obrigada Julian! Fechamos o Q3 com 38 contas enterprise e churn negativo.',
         type: 'text'
@@ -1224,7 +1224,7 @@ export const INITIAL_CHAT_THREADS: ChatThread[] = [
         id: 'msg-1',
         senderId: 'user-rodrigo',
         senderName: 'Rodrigo Mendes',
-        senderAvatar: '/src/assets/images/avatar_investor_rodrigo_1792400687856.jpg',
+        senderAvatar: '/assets/images/avatar_investor_rodrigo_1792400687856.jpg',
         timestamp: '10:30',
         text: 'Olá Camila! Vi a rodada Seed da OmniFlow no feed do Elo Link. A tese de agentes autônomos para procurement conversa diretamente com o que buscamos na Nexa Horizons.',
         type: 'text'
@@ -1233,7 +1233,7 @@ export const INITIAL_CHAT_THREADS: ChatThread[] = [
         id: 'msg-2',
         senderId: 'user-camila',
         senderName: 'Camila Rocha',
-        senderAvatar: '/src/assets/images/avatar_founder_camila_1792400686938.jpg',
+        senderAvatar: '/assets/images/avatar_founder_camila_1792400686938.jpg',
         timestamp: '10:45',
         text: 'Oi Rodrigo! Muito bom conectar por aqui. Temos acompanhado os investimentos da Nexa em infraestrutura SaaS. Acabei de anexar nossa apresentação completa e os dados de cohort.',
         type: 'text'
@@ -1242,7 +1242,7 @@ export const INITIAL_CHAT_THREADS: ChatThread[] = [
         id: 'msg-3',
         senderId: 'user-camila',
         senderName: 'Camila Rocha',
-        senderAvatar: '/src/assets/images/avatar_founder_camila_1792400686938.jpg',
+        senderAvatar: '/assets/images/avatar_founder_camila_1792400686938.jpg',
         timestamp: '10:46',
         type: 'file',
         fileData: {
@@ -1255,7 +1255,7 @@ export const INITIAL_CHAT_THREADS: ChatThread[] = [
         id: 'msg-4',
         senderId: 'user-camila',
         senderName: 'Camila Rocha',
-        senderAvatar: '/src/assets/images/avatar_founder_camila_1792400686938.jpg',
+        senderAvatar: '/assets/images/avatar_founder_camila_1792400686938.jpg',
         timestamp: '10:50',
         type: 'audio',
         audioData: {
@@ -1267,7 +1267,7 @@ export const INITIAL_CHAT_THREADS: ChatThread[] = [
         id: 'msg-5',
         senderId: 'user-rodrigo',
         senderName: 'Rodrigo Mendes',
-        senderAvatar: '/src/assets/images/avatar_investor_rodrigo_1792400687856.jpg',
+        senderAvatar: '/assets/images/avatar_investor_rodrigo_1792400687856.jpg',
         timestamp: '11:42',
         text: 'Recebi o Pitch Deck! O unit economics de procurement é muito convincente. Vamos marcar uma call técnica nesta quinta?',
         type: 'text'
@@ -1275,3 +1275,37 @@ export const INITIAL_CHAT_THREADS: ChatThread[] = [
     ]
   }
 ];
+
+const profilesById = new Map(MOCK_PROFILES_LIST.map(profile => [profile.id, profile]));
+
+INITIAL_EVENTS.forEach(event => {
+  event.confirmedParticipants = event.confirmedParticipants.map(participant => {
+    const profile = profilesById.get(participant.id);
+    if (!profile) return participant;
+
+    return {
+      ...participant,
+      name: profile.name,
+      role: profile.role,
+      avatar: profile.avatar,
+      companyOrFund: profile.role === 'startup' ? profile.companyName || participant.companyOrFund : profile.fundName || participant.companyOrFund
+    };
+  });
+
+  event.featuredSpeakers = event.featuredSpeakers?.map(speaker => {
+    const profile = MOCK_PROFILES_LIST.find(candidate => candidate.name === speaker.name);
+    return profile ? { ...speaker, avatar: profile.avatar } : speaker;
+  });
+});
+
+INITIAL_CHAT_THREADS.forEach(thread => {
+  const participant = profilesById.get(thread.participant.id);
+  if (participant) {
+    thread.participant = participant;
+  }
+
+  thread.messages = thread.messages.map(message => {
+    const sender = profilesById.get(message.senderId);
+    return sender ? { ...message, senderName: sender.name, senderAvatar: sender.avatar } : message;
+  });
+});

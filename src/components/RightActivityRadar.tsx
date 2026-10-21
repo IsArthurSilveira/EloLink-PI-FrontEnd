@@ -63,7 +63,7 @@ export const RightActivityRadar: React.FC<RightActivityRadarProps> = ({
   const activities = [
     {
       id: 'act-1',
-      avatar: '/src/assets/images/avatar_investor_rodrigo_1792400687856.jpg',
+      avatar: '/assets/images/avatar_investor_rodrigo_1792400687856.jpg',
       name: 'Rodrigo Mendes',
       fund: 'Nexa Horizons',
       action: 'assistiu ao seu Vídeo Pitch',

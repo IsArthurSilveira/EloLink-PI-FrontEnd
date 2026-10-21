@@ -61,7 +61,7 @@ export const FeedSection: React.FC<FeedSectionProps> = ({
       {
         id: 'c-1',
         author: 'Rodrigo Mendes',
-        avatar: '/src/assets/images/avatar_investor_rodrigo_1792400687856.jpg',
+        avatar: '/assets/images/avatar_investor_rodrigo_1792400687856.jpg',
         text: 'Excelente pitch, Camila! O unit economics de procurement da OmniFlow AI é admirável. Vamos agendar uma conversa.',
         time: 'Há 18 min'
       }

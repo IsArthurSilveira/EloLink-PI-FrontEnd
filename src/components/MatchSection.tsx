@@ -84,8 +84,8 @@ export const MatchSection: React.FC<MatchSectionProps> = ({
   // Gallery photos for startup
   const candidatePhotos = [
     activeCandidate?.videoPitch?.thumbnail || activeCandidate?.avatar || '',
-    '/src/assets/images/startup_showcase_tech_1792400689208.jpg',
-    '/src/assets/images/event_demoday_stage_1792400689479.jpg'
+    '/assets/images/startup_showcase_tech_1792400689208.jpg',
+    '/assets/images/event_demoday_stage_1792400689479.jpg'
   ].filter(Boolean);
 
   // Calculate intelligent affinity score
