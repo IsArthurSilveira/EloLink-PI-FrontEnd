@@ -62,7 +62,7 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({
             <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-purple-600 via-blue-500 to-emerald-400 p-[1.5px] shadow-lg shadow-purple-950/40 group-hover:scale-105 transition-transform flex items-center justify-center">
               <div className="w-full h-full bg-[#0C0F1C] rounded-[10px] flex items-center justify-center p-1.5 overflow-hidden">
                 <img 
-                  src="/assets/aistudio/elolink_logo_Elo_branco_1_059c311e.png" 
+                  src="/assets/brand/elolink_logo_Elo_branco_1_059c311e.png"
                   alt="EloLink" 
                   className="w-full h-full object-contain filter drop-shadow" 
                 />

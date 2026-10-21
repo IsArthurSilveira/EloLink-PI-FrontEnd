@@ -40,7 +40,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
           <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-purple-600 via-blue-500 to-emerald-400 p-[1.5px] shadow-2xl shadow-purple-950/40">
             <div className="w-full h-full bg-[#0C0F1C] rounded-[14px] flex items-center justify-center p-3 overflow-hidden">
               <img
-                src="/assets/aistudio/elolink_logo_Elo_branco_1_059c311e.png"
+                src="/assets/brand/elolink_logo_Elo_branco_1_059c311e.png"
                 alt="EloLink"
                 className="w-full h-full object-contain"
               />

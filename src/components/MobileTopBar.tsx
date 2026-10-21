@@ -37,7 +37,7 @@ export const MobileTopBar: React.FC<MobileTopBarProps> = ({
         <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-purple-600 via-blue-500 to-emerald-400 p-[1.5px] flex items-center justify-center">
           <div className="w-full h-full bg-[#0C0F1C] rounded-[7px] flex items-center justify-center p-1 overflow-hidden">
             <img 
-              src="/assets/aistudio/elolink_logo_Elo_branco_1_059c311e.png" 
+              src="/assets/brand/elolink_logo_Elo_branco_1_059c311e.png"
               alt="EloLink" 
               className="w-full h-full object-contain filter drop-shadow" 
             />
