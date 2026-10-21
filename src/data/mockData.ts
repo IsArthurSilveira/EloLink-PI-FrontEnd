@@ -1298,14 +1298,54 @@ INITIAL_EVENTS.forEach(event => {
   });
 });
 
-INITIAL_CHAT_THREADS.forEach(thread => {
-  const participant = profilesById.get(thread.participant.id);
-  if (participant) {
-    thread.participant = participant;
-  }
+const chatParticipantAliases: Record<string, string> = {
+  'user-aris-christofi': 'user-gabriel-pulso',
+  'user-julian-mendez': 'user-clara-agtech',
+  'user-gerald-dean': 'user-investor-mariana',
+  'user-eddie-barnett': 'user-investor-andre'
+};
 
-  thread.messages = thread.messages.map(message => {
-    const sender = profilesById.get(message.senderId);
-    return sender ? { ...message, senderName: sender.name, senderAvatar: sender.avatar } : message;
+const chatNameAliases: Record<string, string> = {
+  'Aris Christofi': 'Gabriel Siqueira',
+  'Julian Mendez': 'Clara Fagundes',
+  'Gerald Dean': 'Mariana Duarte',
+  'Eddie Barnett': 'André Vianna',
+  'Henry Drake': 'Rodrigo Mendes',
+  'Mabelle McKenzie': 'Rodrigo Mendes'
+};
+
+const replaceChatNames = (text: string) =>
+  Object.entries(chatNameAliases).reduce(
+    (result, [oldName, newName]) => result.replaceAll(oldName, newName),
+    text
+  );
+
+const normalizedChatThreads = INITIAL_CHAT_THREADS
+  .filter(thread => !['user-henry-drake', 'user-mabelle-mckenzie'].includes(thread.participant.id))
+  .map(thread => {
+    const participantId = chatParticipantAliases[thread.participant.id] || thread.participant.id;
+    const participant = profilesById.get(participantId);
+
+    if (!participant) return thread;
+
+    return {
+      ...thread,
+      participant,
+      lastMessage: replaceChatNames(thread.lastMessage),
+      messages: thread.messages.map(message => {
+        const senderId = chatParticipantAliases[message.senderId] || message.senderId;
+        const sender = profilesById.get(senderId);
+
+        return {
+          ...message,
+          senderId,
+          senderName: sender?.name || replaceChatNames(message.senderName),
+          senderAvatar: sender?.avatar || message.senderAvatar,
+          text: message.text ? replaceChatNames(message.text) : message.text
+        };
+      })
+    };
   });
-});
+
+INITIAL_CHAT_THREADS.length = 0;
+INITIAL_CHAT_THREADS.push(...normalizedChatThreads);
