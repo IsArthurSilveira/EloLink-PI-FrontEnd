@@ -402,7 +402,7 @@ export default function App() {
       />
 
       {/* Main Content Viewport */}
-      <main className={activeTab === 'chat' ? 'h-[calc(100dvh-64px)] md:h-[calc(100vh-64px)] overflow-hidden relative' : 'min-h-[calc(100vh-64px)] pb-16 md:pb-6 relative'}>
+      <main className={activeTab === 'chat' ? 'h-[calc(100dvh-64px)] md:h-[calc(100vh-64px)] overflow-hidden relative' : activeTab === 'feed' ? 'min-h-[calc(100vh-64px)] lg:h-[calc(100dvh-64px)] pb-16 md:pb-6 lg:pb-0 overflow-visible lg:overflow-hidden relative' : 'min-h-[calc(100vh-64px)] pb-16 md:pb-6 relative'}>
         {activeTab === 'feed' && (
           <FeedSection
             posts={posts}

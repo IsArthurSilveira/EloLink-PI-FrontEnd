@@ -97,13 +97,13 @@ export const FeedSection: React.FC<FeedSectionProps> = ({
   const topCandidate = allProfiles.find(p => p.id !== currentUser.id) || allProfiles[0];
 
   return (
-    <div className="max-w-[1600px] mx-auto px-2.5 sm:px-5 lg:px-6 py-3 sm:py-4">
+    <div className="max-w-[1600px] mx-auto px-2.5 sm:px-5 lg:px-6 py-3 sm:py-4 lg:h-full lg:overflow-hidden">
       
       {/* 3-Column Layout from Reference Image 2: Left Profile | Center Feed | Right Radar */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start lg:h-full lg:min-h-0">
         
         {/* LEFT COLUMN: Personal Profile & Networks (Col 3) - Fixed/Sticky */}
-        <div className="hidden lg:block lg:col-span-3 sticky top-[72px] self-start max-h-[calc(100vh-84px)] overflow-y-auto scrollbar-none pr-1">
+        <div className="hidden lg:block lg:col-span-3 self-start h-full min-h-0 overflow-y-auto scrollbar-none pr-1">
           <LeftSidebarProfile
             currentUser={currentUser}
             onOpenProfile={onOpenProfile}
@@ -112,7 +112,7 @@ export const FeedSection: React.FC<FeedSectionProps> = ({
         </div>
 
         {/* CENTER COLUMN: Main Content & Social Dynamics (Col 6) */}
-        <div className="col-span-1 lg:col-span-6 space-y-4">
+        <div className="col-span-1 lg:col-span-6 h-auto lg:h-full min-h-0 space-y-4 overflow-visible lg:overflow-y-auto lg:pr-2">
           
           {/* Post Creation Card */}
           <div className="bg-[#0C0F1D] border border-purple-950/40 rounded-2xl p-3 sm:p-4 shadow-xl">
@@ -421,7 +421,7 @@ export const FeedSection: React.FC<FeedSectionProps> = ({
         </div>
 
         {/* RIGHT COLUMN: Activity & Opportunity Radar (Col 3) - Fixed/Sticky */}
-        <div className="hidden lg:block lg:col-span-3 sticky top-[72px] self-start max-h-[calc(100vh-84px)] overflow-y-auto scrollbar-none pl-1">
+        <div className="hidden lg:block lg:col-span-3 self-start h-full min-h-0 overflow-y-auto scrollbar-none pl-1">
           <RightActivityRadar
             currentUser={currentUser}
             topCandidate={topCandidate}
