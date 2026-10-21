@@ -29,6 +29,7 @@ import { NewPostModal } from './components/NewPostModal';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { SettingsSection } from './components/SettingsSection';
 import { LoginScreen } from './components/LoginScreen';
+import { ChatbotWidget } from './components/ChatbotWidget';
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(() =>
@@ -528,6 +529,8 @@ export default function App() {
           else setActiveTab('feed');
         }}
       />
+
+      <ChatbotWidget />
 
     </div>
   );
