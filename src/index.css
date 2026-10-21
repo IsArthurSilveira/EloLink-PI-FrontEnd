@@ -13,6 +13,27 @@
   :root {
     --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
+    --app-bg: #06080f;
+    --surface-1: #0c0f1d;
+    --surface-2: #0e1220;
+    --surface-3: #11162b;
+    --surface-4: #141724;
+    --surface-muted: #080b16;
+    --app-text: #f4f4f5;
+    --muted-text: #a1a1aa;
+    --app-border: rgba(88, 28, 135, 0.25);
+  }
+
+  html.light {
+    --app-bg: #f4f6fb;
+    --surface-1: #ffffff;
+    --surface-2: #f8f9fd;
+    --surface-3: #eef1f8;
+    --surface-4: #e6eaf3;
+    --surface-muted: #f1f3f8;
+    --app-text: #172033;
+    --muted-text: #647089;
+    --app-border: rgba(99, 102, 241, 0.18);
   }
 }
 
@@ -20,6 +41,9 @@ body {
   font-family: var(--font-sans);
   overflow-x: hidden;
   min-width: 320px;
+  background: var(--app-bg);
+  color: var(--app-text);
+  transition: background-color 180ms ease, color 180ms ease;
 }
 
 button,
@@ -72,4 +96,80 @@ select {
 .scrollbar-none {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* The interface uses utility classes for its dark surfaces. These mappings
+   keep the existing layout and accent colors while making light mode complete. */
+html.light [class*="bg-[#06080F]"],
+html.light [class*="bg-[#070913]"],
+html.light [class*="bg-[#080B16]"],
+html.light [class*="bg-[#0A0D18]"],
+html.light [class*="bg-[#0C0F1C]"],
+html.light [class*="bg-[#0C0F1D]"],
+html.light [class*="bg-[#0D101A]"],
+html.light [class*="bg-[#0D1527]"],
+html.light [class*="bg-[#0E1220]"],
+html.light [class*="bg-[#0F121E]"],
+html.light [class*="bg-[#0F1325]"],
+html.light [class*="bg-[#0F1424]"],
+html.light [class*="bg-[#11162B]"],
+html.light [class*="bg-[#141724]"],
+html.light [class*="bg-[#161D38]"],
+html.light [class*="bg-[#191D2E]"] {
+  background-color: var(--surface-1) !important;
+}
+
+html.light [class*="bg-[#080A14]"],
+html.light [class*="bg-[#080B16]"] {
+  background-color: var(--surface-muted) !important;
+}
+
+html.light [class*="bg-zinc-800"],
+html.light [class*="bg-slate-800"] {
+  background-color: var(--surface-3) !important;
+}
+
+html.light [class*="border-purple-950"],
+html.light [class*="border-purple-900"],
+html.light [class*="border-slate-800"],
+html.light [class*="border-zinc-800"] {
+  border-color: var(--app-border) !important;
+}
+
+html.light [class*="text-zinc-100"],
+html.light [class*="text-zinc-200"],
+html.light [class*="text-zinc-300"],
+html.light [class*="text-slate-100"],
+html.light [class*="text-slate-200"],
+html.light [class*="text-slate-300"] {
+  color: var(--app-text) !important;
+}
+
+html.light [class*="text-zinc-400"],
+html.light [class*="text-zinc-500"],
+html.light [class*="text-slate-400"],
+html.light [class*="text-slate-500"] {
+  color: var(--muted-text) !important;
+}
+
+html.light input,
+html.light textarea,
+html.light select {
+  color: var(--app-text);
+  background-color: var(--surface-muted);
+  border-color: var(--app-border);
+}
+
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: #8a94a8;
+}
+
+html.light [class*="text-white"]:not([class*="bg-purple"]):not([class*="bg-blue"]):not([class*="bg-emerald"]):not([class*="bg-gradient"]) {
+  color: var(--app-text) !important;
+}
+
+html.light [class*="shadow-black"],
+html.light [class*="shadow-2xl"] {
+  --tw-shadow-color: rgba(55, 65, 81, 0.12) !important;
 }
