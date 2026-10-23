@@ -198,6 +198,22 @@ export interface EventItem {
   stageFocus?: string;
 }
 
+export interface EventCreateData {
+  title: string;
+  category: EventItem['category'];
+  organizer: string;
+  date: string;
+  time: string;
+  location: string;
+  format: EventItem['format'];
+  bannerImage: string;
+  description: string;
+  niches: MarketNiche[];
+  capacity?: number;
+  virtualLink?: string;
+  stageFocus?: string;
+}
+
 export interface AppNotification {
   id: string;
   title: string;

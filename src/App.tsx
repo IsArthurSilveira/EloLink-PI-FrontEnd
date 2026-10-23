@@ -6,7 +6,8 @@ import {
   AppNotification, 
   ChatThread, 
   ChatMessage, 
-  Review 
+  Review,
+  EventCreateData
 } from './types';
 import { 
   CURRENT_FOUNDER_USER, 
@@ -334,17 +335,20 @@ export default function App() {
     );
   };
 
-  const handleCreateEvent = (eventData: Pick<EventItem, 'title' | 'date' | 'time' | 'location' | 'format' | 'category'>) => {
+  const handleCreateEvent = (eventData: EventCreateData) => {
     const newEvent: EventItem = {
       ...eventData,
       id: `event-admin-${Date.now()}`,
       organizer: 'EloLink Admin',
-      bannerImage: '/assets/images/event_demoday_stage_1792400689479.jpg',
-      description: 'Evento criado pela administração do EloLink para a comunidade.',
-      niches: ['AI & B2B SaaS'],
+      bannerImage: eventData.bannerImage || '/assets/images/event_demoday_stage_1792400689479.jpg',
+      description: eventData.description,
+      niches: eventData.niches,
       rsvpsCount: 0,
       isUserRegistered: false,
-      confirmedParticipants: []
+      confirmedParticipants: [],
+      capacity: eventData.capacity,
+      virtualLink: eventData.virtualLink,
+      stageFocus: eventData.stageFocus
     };
     setEvents(prev => [newEvent, ...prev]);
     triggerNotification({ title: 'Evento criado', message: `${newEvent.title} foi adicionado à agenda.`, type: 'event', targetId: newEvent.id });

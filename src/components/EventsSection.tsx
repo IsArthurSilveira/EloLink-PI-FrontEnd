@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { EventItem, UserProfile } from '../types';
+import { EventCreateData, EventItem, MarketNiche, UserProfile } from '../types';
 import { 
   Calendar, 
   MapPin, 
@@ -37,7 +37,7 @@ interface EventsSectionProps {
   onOpenProfile: (user: UserProfile) => void;
   onOpenChatWithParticipant: (participantId: string) => void;
   isAdmin?: boolean;
-  onCreateEvent?: (event: Pick<EventItem, 'title' | 'date' | 'time' | 'location' | 'format' | 'category'>) => void;
+  onCreateEvent?: (event: EventCreateData) => void;
 }
 
 export const EventsSection: React.FC<EventsSectionProps> = ({
@@ -45,9 +45,9 @@ export const EventsSection: React.FC<EventsSectionProps> = ({
   currentUser,
   onToggleRsvp,
   onOpenProfile,
-  onOpenChatWithParticipant
-  , isAdmin = false
-  , onCreateEvent
+  onOpenChatWithParticipant,
+  isAdmin = false,
+  onCreateEvent
 }) => {
   // Filters & Search
   const [searchQuery, setSearchQuery] = useState('');
@@ -67,7 +67,22 @@ export const EventsSection: React.FC<EventsSectionProps> = ({
   const [modalTab, setModalTab] = useState<'details' | 'agenda' | 'participants'>('details');
   const [copiedNotification, setCopiedNotification] = useState<string | null>(null);
   const [participantRoleFilter, setParticipantRoleFilter] = useState<'all' | 'startup' | 'investor'>('all');
-  const [newEvent, setNewEvent] = useState({ title: '', date: '', time: '', location: '', format: 'Online' as EventItem['format'], category: 'Demo Day' as EventItem['category'] });
+  const [isCreateEventOpen, setIsCreateEventOpen] = useState(false);
+  const [newEvent, setNewEvent] = useState<EventCreateData>({
+    title: '',
+    category: 'Demo Day',
+    organizer: 'EloLink',
+    date: '',
+    time: '',
+    location: '',
+    format: 'Online',
+    bannerImage: '/assets/images/event_demoday_stage_1792400689479.jpg',
+    description: '',
+    niches: ['AI & B2B SaaS'],
+    capacity: undefined,
+    virtualLink: '',
+    stageFocus: ''
+  });
 
   const categories = [
     'Demo Day',
@@ -197,9 +212,14 @@ export const EventsSection: React.FC<EventsSectionProps> = ({
 
   const submitNewEvent = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!newEvent.title.trim() || !newEvent.date || !newEvent.time || !newEvent.location || !onCreateEvent) return;
-    onCreateEvent(newEvent);
-    setNewEvent({ title: '', date: '', time: '', location: '', format: 'Online', category: 'Demo Day' });
+    if (!newEvent.title.trim() || !newEvent.date || !newEvent.time || !newEvent.location || !newEvent.description.trim() || !onCreateEvent) return;
+    onCreateEvent({ ...newEvent, niches: newEvent.niches.length ? newEvent.niches : ['AI & B2B SaaS'] });
+    setIsCreateEventOpen(false);
+    setNewEvent({
+      title: '', category: 'Demo Day', organizer: 'EloLink', date: '', time: '', location: '',
+      format: 'Online', bannerImage: '/assets/images/event_demoday_stage_1792400689479.jpg',
+      description: '', niches: ['AI & B2B SaaS'], capacity: undefined, virtualLink: '', stageFocus: ''
+    });
   };
 
   return (
@@ -213,22 +233,6 @@ export const EventsSection: React.FC<EventsSectionProps> = ({
         </div>
       )}
 
-      {isAdmin && (
-        <form onSubmit={submitNewEvent} className="rounded-2xl border border-emerald-500/25 bg-emerald-500/5 p-4 shadow-lg">
-          <div className="mb-3 flex items-center gap-2">
-            <CalendarPlus className="h-4 w-4 text-emerald-400" />
-            <div><h2 className="text-sm font-bold text-white">Gestão administrativa de eventos</h2><p className="text-[11px] text-slate-400">Crie um evento e disponibilize-o para toda a comunidade.</p></div>
-          </div>
-          <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-6">
-            <input required value={newEvent.title} onChange={e => setNewEvent(prev => ({ ...prev, title: e.target.value }))} placeholder="Nome do evento" className="rounded-xl bg-[#080A14] px-3 py-2.5 text-xs text-white outline-none ring-1 ring-purple-950/50 focus:ring-purple-500 lg:col-span-2" />
-            <input required type="date" value={newEvent.date} onChange={e => setNewEvent(prev => ({ ...prev, date: e.target.value }))} className="rounded-xl bg-[#080A14] px-3 py-2.5 text-xs text-white outline-none ring-1 ring-purple-950/50 focus:ring-purple-500" />
-            <input required type="text" value={newEvent.time} onChange={e => setNewEvent(prev => ({ ...prev, time: e.target.value }))} placeholder="18:30 - 21:00" className="rounded-xl bg-[#080A14] px-3 py-2.5 text-xs text-white outline-none ring-1 ring-purple-950/50 focus:ring-purple-500" />
-            <input required value={newEvent.location} onChange={e => setNewEvent(prev => ({ ...prev, location: e.target.value }))} placeholder="Local ou link" className="rounded-xl bg-[#080A14] px-3 py-2.5 text-xs text-white outline-none ring-1 ring-purple-950/50 focus:ring-purple-500" />
-            <button type="submit" className="rounded-xl bg-emerald-500 px-3 py-2.5 text-xs font-black text-black transition-colors hover:bg-emerald-400">Adicionar evento</button>
-          </div>
-        </form>
-      )}
-
       {/* Top Header & Metrics */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-2">
         <div>
@@ -236,6 +240,13 @@ export const EventsSection: React.FC<EventsSectionProps> = ({
             <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
             <span>Ecossistema de Deals & Pitch Sessions</span>
           </div>
+
+          {isAdmin && (
+            <button type="button" onClick={() => setIsCreateEventOpen(true)} className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-emerald-500 px-4 py-3 text-xs font-black text-black shadow-lg shadow-emerald-950/20 transition-colors hover:bg-emerald-400">
+              <CalendarPlus className="h-4 w-4" />
+              Criar evento
+            </button>
+          )}
           <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight flex items-center gap-3">
             <span>Eventos & Demo Days</span>
             <span className="text-xs sm:text-sm font-semibold px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
@@ -246,6 +257,44 @@ export const EventsSection: React.FC<EventsSectionProps> = ({
             Painel escalável com lista consolidada de Demo Days, Pitch Nights presenciais e bancas de Due Diligence. Clique em qualquer linha para abrir a programação e os participantes.
           </p>
         </div>
+
+        {isAdmin && isCreateEventOpen && (
+          <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/70 p-3 backdrop-blur-sm sm:p-6" role="dialog" aria-modal="true" aria-labelledby="create-event-title">
+            <form onSubmit={submitNewEvent} className="max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-purple-900/50 bg-[#0C0F1D] p-4 shadow-2xl sm:p-6">
+              <div className="mb-5 flex items-start justify-between gap-4">
+                <div>
+                  <p className="mb-1 text-[10px] font-black uppercase tracking-widest text-emerald-400">Painel administrativo</p>
+                  <h2 id="create-event-title" className="text-xl font-black text-white">Cadastrar novo evento</h2>
+                  <p className="mt-1 text-xs text-zinc-400">Preencha todas as informações para publicar o evento na comunidade.</p>
+                </div>
+                <button type="button" onClick={() => setIsCreateEventOpen(false)} className="rounded-lg p-2 text-zinc-500 hover:bg-zinc-800 hover:text-white" aria-label="Fechar cadastro de evento">
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <label className="sm:col-span-2"><span className="field-label">Nome do evento *</span><input required value={newEvent.title} onChange={e => setNewEvent(prev => ({ ...prev, title: e.target.value }))} placeholder="Ex.: LATAM B2B AI Demo Day" className="field-input" /></label>
+                <label><span className="field-label">Categoria *</span><select value={newEvent.category} onChange={e => setNewEvent(prev => ({ ...prev, category: e.target.value as EventItem['category'] }))} className="field-input">{categories.map(category => <option key={category} value={category}>{category}</option>)}</select></label>
+                <label><span className="field-label">Organizador *</span><input required value={newEvent.organizer} onChange={e => setNewEvent(prev => ({ ...prev, organizer: e.target.value }))} placeholder="Nome da organização" className="field-input" /></label>
+                <label><span className="field-label">Data *</span><input required type="date" value={newEvent.date} onChange={e => setNewEvent(prev => ({ ...prev, date: e.target.value }))} className="field-input" /></label>
+                <label><span className="field-label">Horário *</span><input required value={newEvent.time} onChange={e => setNewEvent(prev => ({ ...prev, time: e.target.value }))} placeholder="18:30 - 21:00 (BRT)" className="field-input" /></label>
+                <label><span className="field-label">Formato *</span><select value={newEvent.format} onChange={e => setNewEvent(prev => ({ ...prev, format: e.target.value as EventItem['format'] }))} className="field-input">{formats.map(format => <option key={format} value={format}>{format}</option>)}</select></label>
+                <label><span className="field-label">Local ou endereço *</span><input required value={newEvent.location} onChange={e => setNewEvent(prev => ({ ...prev, location: e.target.value }))} placeholder="Ex.: São Paulo, SP ou link" className="field-input" /></label>
+                <label><span className="field-label">Link virtual</span><input type="url" value={newEvent.virtualLink} onChange={e => setNewEvent(prev => ({ ...prev, virtualLink: e.target.value }))} placeholder="https://..." className="field-input" /></label>
+                <label><span className="field-label">Capacidade</span><input type="number" min="1" value={newEvent.capacity ?? ''} onChange={e => setNewEvent(prev => ({ ...prev, capacity: e.target.value ? Number(e.target.value) : undefined }))} placeholder="Ex.: 250" className="field-input" /></label>
+                <label className="sm:col-span-2"><span className="field-label">Imagem de capa (URL)</span><input type="url" value={newEvent.bannerImage} onChange={e => setNewEvent(prev => ({ ...prev, bannerImage: e.target.value }))} placeholder="https://..." className="field-input" /></label>
+                <label className="sm:col-span-2"><span className="field-label">Foco do evento</span><input value={newEvent.stageFocus} onChange={e => setNewEvent(prev => ({ ...prev, stageFocus: e.target.value }))} placeholder="Ex.: Fundraising Seed, IA aplicada e SaaS B2B" className="field-input" /></label>
+                <label className="sm:col-span-2"><span className="field-label">Descrição *</span><textarea required rows={4} value={newEvent.description} onChange={e => setNewEvent(prev => ({ ...prev, description: e.target.value }))} placeholder="Explique o objetivo, público e programação do evento..." className="field-input resize-y" /></label>
+                <fieldset className="sm:col-span-2"><legend className="field-label">Nichos relacionados</legend><div className="flex flex-wrap gap-2">{(['AI & B2B SaaS', 'Fintech', 'Healthtech', 'Cleantech & Clima', 'Agtech', 'Logtech & Supply', 'Edtech', 'Deeptech & Hardware'] as MarketNiche[]).map(niche => <label key={niche} className={`cursor-pointer rounded-lg border px-2.5 py-2 text-[11px] font-semibold ${newEvent.niches.includes(niche) ? 'border-purple-500 bg-purple-500/15 text-purple-200' : 'border-purple-950/50 text-zinc-400'}`}><input type="checkbox" className="sr-only" checked={newEvent.niches.includes(niche)} onChange={e => setNewEvent(prev => ({ ...prev, niches: e.target.checked ? [...prev.niches, niche] : prev.niches.filter(item => item !== niche) }))} />{niche}</label>)}</div></fieldset>
+              </div>
+
+              <div className="mt-6 flex flex-col-reverse gap-2 border-t border-purple-900/30 pt-4 sm:flex-row sm:justify-end">
+                <button type="button" onClick={() => setIsCreateEventOpen(false)} className="rounded-xl border border-purple-900/40 px-4 py-2.5 text-xs font-bold text-zinc-300 hover:bg-zinc-800">Cancelar</button>
+                <button type="submit" className="rounded-xl bg-emerald-500 px-5 py-2.5 text-xs font-black text-black hover:bg-emerald-400">Publicar evento</button>
+              </div>
+            </form>
+          </div>
+        )}
 
         {/* Quick KPI stats pills */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
