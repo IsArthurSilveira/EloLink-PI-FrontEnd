@@ -36,6 +36,8 @@ interface EventsSectionProps {
   onToggleRsvp: (eventId: string) => void;
   onOpenProfile: (user: UserProfile) => void;
   onOpenChatWithParticipant: (participantId: string) => void;
+  isAdmin?: boolean;
+  onCreateEvent?: (event: Pick<EventItem, 'title' | 'date' | 'time' | 'location' | 'format' | 'category'>) => void;
 }
 
 export const EventsSection: React.FC<EventsSectionProps> = ({
@@ -44,6 +46,8 @@ export const EventsSection: React.FC<EventsSectionProps> = ({
   onToggleRsvp,
   onOpenProfile,
   onOpenChatWithParticipant
+  , isAdmin = false
+  , onCreateEvent
 }) => {
   // Filters & Search
   const [searchQuery, setSearchQuery] = useState('');
@@ -63,6 +67,7 @@ export const EventsSection: React.FC<EventsSectionProps> = ({
   const [modalTab, setModalTab] = useState<'details' | 'agenda' | 'participants'>('details');
   const [copiedNotification, setCopiedNotification] = useState<string | null>(null);
   const [participantRoleFilter, setParticipantRoleFilter] = useState<'all' | 'startup' | 'investor'>('all');
+  const [newEvent, setNewEvent] = useState({ title: '', date: '', time: '', location: '', format: 'Online' as EventItem['format'], category: 'Demo Day' as EventItem['category'] });
 
   const categories = [
     'Demo Day',
@@ -190,6 +195,13 @@ export const EventsSection: React.FC<EventsSectionProps> = ({
     }
   };
 
+  const submitNewEvent = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!newEvent.title.trim() || !newEvent.date || !newEvent.time || !newEvent.location || !onCreateEvent) return;
+    onCreateEvent(newEvent);
+    setNewEvent({ title: '', date: '', time: '', location: '', format: 'Online', category: 'Demo Day' });
+  };
+
   return (
     <div className="w-full space-y-4 sm:space-y-6">
       
@@ -199,6 +211,22 @@ export const EventsSection: React.FC<EventsSectionProps> = ({
           <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
           <span>{copiedNotification}</span>
         </div>
+      )}
+
+      {isAdmin && (
+        <form onSubmit={submitNewEvent} className="rounded-2xl border border-emerald-500/25 bg-emerald-500/5 p-4 shadow-lg">
+          <div className="mb-3 flex items-center gap-2">
+            <CalendarPlus className="h-4 w-4 text-emerald-400" />
+            <div><h2 className="text-sm font-bold text-white">Gestão administrativa de eventos</h2><p className="text-[11px] text-slate-400">Crie um evento e disponibilize-o para toda a comunidade.</p></div>
+          </div>
+          <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-6">
+            <input required value={newEvent.title} onChange={e => setNewEvent(prev => ({ ...prev, title: e.target.value }))} placeholder="Nome do evento" className="rounded-xl bg-[#080A14] px-3 py-2.5 text-xs text-white outline-none ring-1 ring-purple-950/50 focus:ring-purple-500 lg:col-span-2" />
+            <input required type="date" value={newEvent.date} onChange={e => setNewEvent(prev => ({ ...prev, date: e.target.value }))} className="rounded-xl bg-[#080A14] px-3 py-2.5 text-xs text-white outline-none ring-1 ring-purple-950/50 focus:ring-purple-500" />
+            <input required type="text" value={newEvent.time} onChange={e => setNewEvent(prev => ({ ...prev, time: e.target.value }))} placeholder="18:30 - 21:00" className="rounded-xl bg-[#080A14] px-3 py-2.5 text-xs text-white outline-none ring-1 ring-purple-950/50 focus:ring-purple-500" />
+            <input required value={newEvent.location} onChange={e => setNewEvent(prev => ({ ...prev, location: e.target.value }))} placeholder="Local ou link" className="rounded-xl bg-[#080A14] px-3 py-2.5 text-xs text-white outline-none ring-1 ring-purple-950/50 focus:ring-purple-500" />
+            <button type="submit" className="rounded-xl bg-emerald-500 px-3 py-2.5 text-xs font-black text-black transition-colors hover:bg-emerald-400">Adicionar evento</button>
+          </div>
+        </form>
       )}
 
       {/* Top Header & Metrics */}

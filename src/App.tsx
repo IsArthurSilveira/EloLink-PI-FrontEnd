@@ -43,6 +43,9 @@ export default function App() {
 
   // Current logged in user (can switch between Camila and Rodrigo)
   const [currentUser, setCurrentUser] = useState<UserProfile>(CURRENT_FOUNDER_USER);
+  const [accountRole, setAccountRole] = useState<'admin' | 'investor' | 'startup'>(() =>
+    typeof window !== 'undefined' ? (localStorage.getItem('elo-link-role') as 'admin' | 'investor' | 'startup') || 'startup' : 'startup'
+  );
 
   // Profiles database
   const [profiles, setProfiles] = useState<UserProfile[]>(MOCK_PROFILES_LIST);
@@ -95,11 +98,16 @@ export default function App() {
 
   const handleLogout = () => {
     localStorage.removeItem('elo-link-authenticated');
+    localStorage.removeItem('elo-link-role');
     setIsAuthenticated(false);
   };
 
   if (!isAuthenticated) {
-    return <LoginScreen onLogin={() => setIsAuthenticated(true)} />;
+    return <LoginScreen onLogin={(role) => {
+      setAccountRole(role);
+      setCurrentUser(role === 'investor' || role === 'admin' ? CURRENT_INVESTOR_USER : CURRENT_FOUNDER_USER);
+      setIsAuthenticated(true);
+    }} />;
   }
 
   // Update current user profile from settings
@@ -319,10 +327,27 @@ export default function App() {
             rsvpsCount: isReg ? ev.rsvpsCount + 1 : ev.rsvpsCount - 1,
             confirmedParticipants: updatedParticipants
           };
+
         }
         return ev;
       })
     );
+  };
+
+  const handleCreateEvent = (eventData: Pick<EventItem, 'title' | 'date' | 'time' | 'location' | 'format' | 'category'>) => {
+    const newEvent: EventItem = {
+      ...eventData,
+      id: `event-admin-${Date.now()}`,
+      organizer: 'EloLink Admin',
+      bannerImage: '/assets/images/event_demoday_stage_1792400689479.jpg',
+      description: 'Evento criado pela administração do EloLink para a comunidade.',
+      niches: ['AI & B2B SaaS'],
+      rsvpsCount: 0,
+      isUserRegistered: false,
+      confirmedParticipants: []
+    };
+    setEvents(prev => [newEvent, ...prev]);
+    triggerNotification({ title: 'Evento criado', message: `${newEvent.title} foi adicionado à agenda.`, type: 'event', targetId: newEvent.id });
   };
 
   // Add review to a user profile
@@ -443,6 +468,8 @@ export default function App() {
                 const user = profiles.find(p => p.id === participantId);
                 if (user) handleOpenChatWith(user);
               }}
+              isAdmin={accountRole === 'admin'}
+              onCreateEvent={handleCreateEvent}
             />
           </div>
         )}
