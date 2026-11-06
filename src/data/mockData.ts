@@ -84,7 +84,74 @@ export const CURRENT_FOUNDER_USER: UserProfile = {
       stage: 'Seed',
       metricHighlight: '12 enterprise POCs'
     }
-  ]
+  ],
+  businessModelCanvas: {
+    maturityScore: 86,
+    maturityStage: 'Product-Market Fit (PMF)',
+    lastUpdated: 'Outubro 2026',
+    keyPartners: [
+      'Integradores oficiais SAP & TOTVS certificados',
+      'Cloud Providers (AWS & Google Cloud for Startups)',
+      'Associações de Procurement e Logística LATAM',
+      'Operadores 3PL e armazéns aduaneiros parceiros'
+    ],
+    keyActivities: [
+      'Treinamento e fine-tuning de agentes autônomos para Supply Chain',
+      'Desenvolvimento de conectores para ERPs legados sem downtime',
+      'Auditoria contínua de compliance fiscal e LGPD/SOC2',
+      'Suporte técnico e onboarding consultivo enterprise'
+    ],
+    keyResources: [
+      'Modelos de IA proprietários treinados em +2M regras fiscais',
+      'Equipe técnica sênior (Ex-iFood, Nubank, TOTVS)',
+      'Infraestrutura de inferência distribuída em GPU de baixa latência',
+      'Base de dados anonimizada de benchmark de cotações B2B'
+    ],
+    valuePropositions: [
+      'Redução de 85% do tempo gasto em conferências manuais de compras',
+      'Eliminação de 99.4% dos erros de conciliação fiscal e pedidos',
+      'Integração direta com SAP/TOTVS sem necessidade de trocar de ERP',
+      'Previsibilidade de ruptura de estoque com alertas inteligentes'
+    ],
+    customerRelationships: [
+      'Atendimento dedicado de Enterprise Customer Success',
+      'Co-design de fluxos e automações customizadas para cada cliente',
+      'Comunidade exclusiva de Diretores de Suprimentos na EloLink',
+      'SLA de 15 minutos para suporte de chamados críticos'
+    ],
+    channels: [
+      'Vendas consultivas B2B diretas (Enterprise Outbound)',
+      'Marketplace e ecossistema de parceiros ERP (SAP Store)',
+      'Eventos setoriais, Demo Days e Pitch Sessions',
+      'Efeito de rede e indicação direta de CFOs e CPOs (NPS 78)'
+    ],
+    customerSegments: [
+      'Indústrias de manufatura e bens de consumo (Faturamento R$ 50M+)',
+      'Grandes varejistas com cadeia de suprimentos distribuída',
+      'Distribuidores de peças e insumos com catálogo de alta rotação',
+      'Operadores logísticos 3PL e 4PL corporativos'
+    ],
+    costStructure: [
+      'Infraestrutura de servidores GPU e cloud computing',
+      'Folha de pagamento de engenharia de software e inteligência artificial',
+      'Custos de aquisição de clientes (CAC) e eventos do ecossistema',
+      'Auditorias de segurança de dados e certificações corporativas'
+    ],
+    revenueStreams: [
+      'Assinatura SaaS recorrente mensal por volume de pedidos processados',
+      'Taxa de implementação (setup) de conectores ERP legados',
+      'Módulo premium de auditoria preditiva e compliance fiscal',
+      'Contratos anuais corporativos com faturamento antecipado'
+    ],
+    maturityMetrics: {
+      pmfScore: '88% Must-Have',
+      cacPayback: '4.6 meses',
+      ltvCac: '6.2x',
+      burnMultiple: '0.9x (Eficiente)',
+      grossMargin: '82%',
+      nrr: '128% (Expansão)'
+    }
+  }
 };
 
 export const CURRENT_INVESTOR_USER: UserProfile = {

@@ -1,0 +1,8 @@
+{
+  "name": "Elo Link",
+  "description": "Plataforma de conexão inteligente entre startups e investidores com feed em tempo real, match bidirecional, chat multimídia e eventos.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

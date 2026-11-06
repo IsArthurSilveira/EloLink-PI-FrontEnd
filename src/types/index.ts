@@ -44,6 +44,36 @@ export interface PortfolioItem {
   metricHighlight?: string;
 }
 
+export type MaturityStage = 
+  | 'Ideação & Descoberta'
+  | 'Validação de Problema'
+  | 'MVP & Primeiros Clientes'
+  | 'Product-Market Fit (PMF)'
+  | 'Escala & Eficiência Operacional';
+
+export interface BusinessModelCanvas {
+  maturityScore: number; // 0 - 100
+  maturityStage: MaturityStage;
+  lastUpdated: string;
+  keyPartners: string[];
+  keyActivities: string[];
+  keyResources: string[];
+  valuePropositions: string[];
+  customerRelationships: string[];
+  channels: string[];
+  customerSegments: string[];
+  costStructure: string[];
+  revenueStreams: string[];
+  maturityMetrics?: {
+    pmfScore?: string;
+    cacPayback?: string;
+    ltvCac?: string;
+    burnMultiple?: string;
+    grossMargin?: string;
+    nrr?: string;
+  };
+}
+
 export interface UserProfile {
   id: string;
   name: string;
@@ -88,6 +118,7 @@ export interface UserProfile {
   reviewsCount: number;
   reviews: Review[];
   portfolioItems: PortfolioItem[];
+  businessModelCanvas?: BusinessModelCanvas;
 }
 
 export interface VideoPitch {

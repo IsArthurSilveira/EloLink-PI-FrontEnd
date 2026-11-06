@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 36" fill="currentColor">
+  <defs>
+    <mask id="elolink-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="42" height="36">
+      <image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAkCAYAAAD/yagrAAADV0lEQVR4nOWYW4iNURTHZ9C4TZLL5FYol+EBKddiJB5mmAcpxYMyyqTQKOFBhCfy4kkeJuNhIpNC1CilPJjcYlKEkTJSalwGw8llfs6utWu3Zu/9feccGsaq3T7n2+vy32utvdb+viKg6F8YvQ7gvwJa/AcN56w7tNBP5gqgGbgGrFJr+Q4rfwx4CtwEFiRtIKbwAj3pRoHeLpbxFehWuo/m49FFIuwqs7+rC/ToWQ/InzIPzxXoJY83LV0tEOiziO6qXIGeiihrLhBoa0T3/FyBTouEfl6BQCs8uk3oP+STo2bs9+z4cIEg7dik9L4HBsYqSkiRPdXjgR1ALVD2m0C6YyYwRn5Hy15MiQVbki1Ly4FG4C7wBGiTXLsuG5mkZNzyNTu73gDcBz4C34EM0A5cTptKIYBmlAIXRXEaeg4MckBWSUjTUCewJOZZ/cAy1XgSPkaWb5YAbclR3tbRMyGwvlDXK+G0IBcDo4DP8swHMiNdKaanyZM+PTy6VwlZsC+zfXkDMFrCa8aEbEmpkwYwLtsk5no22C3/D4qs9ZQ54Quz94c7SsbaXRvyaLGcPpf5h8zrUhy4bUrWzveAAQkHZaMHbCbm0RaPoditxj5rUobsfCQiq0edJxWqfUCHKoCGTiR40oTxUSBVKh2+sdmyttqpJqENdyj7zT6glZ4dlUa8YXK0Sx0aO0925PY4+jKSm6HN71P2P/mA7lRM7QmhOqn4Dci3sgHrpYeeKO2K6CxXOjM+oLsVU1sC0O2K/7azNtG5GOuUiHWh6WmAblFMnSlO+gFpo3XO2maPF4MlJyH0r3xAtdsNTY3kqO/5FeU9C9AckpEpqkeHsl8fKk9d6mDYPA3daqyBMulGeA5WYwSg+/yQx1FTQkBrFKMxdivBwNZIqJcJT/A9SEadkjPzA82nDb9WoeuWm/d6YITwDQFWCq/Pi2+kLpc7nm4QD9kuZXSscN6fdLMYFutMZmGw0599pPt4KNRrPDyWvngih6oMPVLFF1LjjXeekIbI8HyTV2yrpzYHeXdDM0L5nJTgSVe9jHzxcNujnedIPU5D57LvY/3z+VLiCiwFjgOP5brXKv8rUl44yqROnwdeSH00bwOnpbaWpNDRN77m/VWj1wH0OaC/ADRIgaV9Prv4AAAAAElFTkSuQmCC" width="42" height="36" />
+    </mask>
+  </defs>
+  <rect width="42" height="36" fill="currentColor" mask="url(#elolink-mask)" />
+</svg>

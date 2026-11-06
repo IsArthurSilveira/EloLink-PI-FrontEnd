@@ -23,7 +23,7 @@ import { FeedSection } from './components/FeedSection';
 import { MatchSection } from './components/MatchSection';
 import { EventsSection } from './components/EventsSection';
 import { ChatSection } from './components/ChatSection';
-import { ProfileModal } from './components/ProfileModal';
+import { ProfileSection } from './components/ProfileSection';
 import { NotificationsDrawer } from './components/NotificationsDrawer';
 import { NotificationToast } from './components/NotificationToast';
 import { NewPostModal } from './components/NewPostModal';
@@ -37,13 +37,15 @@ export default function App() {
     typeof window !== 'undefined' && localStorage.getItem('elo-link-authenticated') === 'true'
   );
   // Navigation & View State
-  const [activeTab, setActiveTab] = useState<'feed' | 'match' | 'events' | 'chat' | 'settings'>('feed');
+  const [activeTab, setActiveTab] = useState<'feed' | 'match' | 'events' | 'chat' | 'settings' | 'profile'>('feed');
+  const [previousTab, setPreviousTab] = useState<'feed' | 'match' | 'events' | 'chat' | 'settings' | 'profile'>('feed');
   
   // Theme state
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
 
   // Current logged in user (can switch between Camila and Rodrigo)
   const [currentUser, setCurrentUser] = useState<UserProfile>(CURRENT_FOUNDER_USER);
+  const [viewingProfile, setViewingProfile] = useState<UserProfile>(CURRENT_FOUNDER_USER);
   const [accountRole, setAccountRole] = useState<'admin' | 'investor' | 'startup'>(() =>
     typeof window !== 'undefined' ? (localStorage.getItem('elo-link-role') as 'admin' | 'investor' | 'startup') || 'startup' : 'startup'
   );
@@ -67,7 +69,6 @@ export default function App() {
   const [activeToast, setActiveToast] = useState<AppNotification | null>(null);
 
   // Modals
-  const [selectedProfileModal, setSelectedProfileModal] = useState<UserProfile | null>(null);
   const [isNewPostModalOpen, setIsNewPostModalOpen] = useState(false);
 
   // Auto theme synchronization
@@ -92,8 +93,24 @@ export default function App() {
   const handleSwitchUser = () => {
     if (currentUser.id === CURRENT_FOUNDER_USER.id) {
       setCurrentUser(CURRENT_INVESTOR_USER);
+      if (viewingProfile.id === CURRENT_FOUNDER_USER.id) {
+        setViewingProfile(CURRENT_INVESTOR_USER);
+      }
     } else {
       setCurrentUser(CURRENT_FOUNDER_USER);
+      if (viewingProfile.id === CURRENT_INVESTOR_USER.id) {
+        setViewingProfile(CURRENT_FOUNDER_USER);
+      }
+    }
+  };
+
+  // Open any profile directly as a full page
+  const handleOpenProfilePage = (user: UserProfile) => {
+    setViewingProfile(user);
+    setPreviousTab(activeTab === 'profile' ? 'feed' : activeTab);
+    setActiveTab('profile');
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -106,14 +123,17 @@ export default function App() {
   if (!isAuthenticated) {
     return <LoginScreen onLogin={(role) => {
       setAccountRole(role);
-      setCurrentUser(role === 'investor' || role === 'admin' ? CURRENT_INVESTOR_USER : CURRENT_FOUNDER_USER);
+      const nextUser = role === 'investor' || role === 'admin' ? CURRENT_INVESTOR_USER : CURRENT_FOUNDER_USER;
+      setCurrentUser(nextUser);
+      setViewingProfile(nextUser);
       setIsAuthenticated(true);
     }} />;
   }
 
-  // Update current user profile from settings
+  // Update current user profile from profile page or settings
   const handleUpdateCurrentUser = (updated: Partial<UserProfile>) => {
     setCurrentUser(prev => ({ ...prev, ...updated }));
+    setViewingProfile(prev => (prev.id === currentUser.id ? { ...prev, ...updated } : prev));
     setProfiles(prev => prev.map(p => p.id === currentUser.id ? { ...p, ...updated } : p));
   };
 
@@ -380,9 +400,8 @@ export default function App() {
       })
     );
 
-    if (selectedProfileModal && selectedProfileModal.id === targetUserId) {
-      setSelectedProfileModal(prev => {
-        if (!prev) return null;
+    if (viewingProfile && viewingProfile.id === targetUserId) {
+      setViewingProfile(prev => {
         const updatedReviews = [newReview, ...(prev.reviews || [])];
         const totalRating = updatedReviews.reduce((acc, r) => acc + r.rating, 0);
         return {
@@ -422,7 +441,7 @@ export default function App() {
         currentUser={currentUser}
         onSwitchUser={handleSwitchUser}
         onLogout={handleLogout}
-        onOpenProfile={(user) => setSelectedProfileModal(user)}
+        onOpenProfile={handleOpenProfilePage}
         notifications={notifications}
         onOpenNotifications={() => setIsNotificationsOpen(true)}
         theme={theme}
@@ -431,14 +450,20 @@ export default function App() {
       />
 
       {/* Main Content Viewport */}
-      <main className={activeTab === 'chat' ? 'h-[calc(100dvh-64px)] md:h-[calc(100vh-64px)] overflow-hidden relative' : activeTab === 'feed' ? 'min-h-[calc(100vh-64px)] lg:h-[calc(100dvh-64px)] pb-16 md:pb-6 lg:pb-0 overflow-visible lg:overflow-hidden relative' : 'min-h-[calc(100vh-64px)] pb-16 md:pb-6 relative'}>
+      <main className={
+        activeTab === 'chat' 
+          ? 'h-[calc(100dvh-64px)] md:h-[calc(100vh-64px)] overflow-hidden relative' 
+          : activeTab === 'feed' 
+          ? 'min-h-[calc(100vh-64px)] lg:h-[calc(100dvh-64px)] pb-16 md:pb-6 lg:pb-0 overflow-visible lg:overflow-hidden relative' 
+          : 'min-h-[calc(100vh-64px)] pb-16 md:pb-6 relative'
+      }>
         {activeTab === 'feed' && (
           <FeedSection
             posts={posts}
             events={events}
             currentUser={currentUser}
             allProfiles={profiles}
-            onOpenProfile={(user) => setSelectedProfileModal(user)}
+            onOpenProfile={handleOpenProfilePage}
             onOpenNewPostModal={() => setIsNewPostModalOpen(true)}
             onToggleLikePost={handleToggleLikePost}
             onAddComment={handleAddComment}
@@ -454,7 +479,7 @@ export default function App() {
             <MatchSection
               currentUser={currentUser}
               allProfiles={profiles}
-              onOpenProfile={(user) => setSelectedProfileModal(user)}
+              onOpenProfile={handleOpenProfilePage}
               onMutualMatch={handleMutualMatch}
               onOpenChatWith={handleOpenChatWith}
             />
@@ -467,7 +492,7 @@ export default function App() {
               events={events}
               currentUser={currentUser}
               onToggleRsvp={handleToggleRsvpEvent}
-              onOpenProfile={(user) => setSelectedProfileModal(user)}
+              onOpenProfile={handleOpenProfilePage}
               onOpenChatWithParticipant={(participantId) => {
                 const user = profiles.find(p => p.id === participantId);
                 if (user) handleOpenChatWith(user);
@@ -486,9 +511,27 @@ export default function App() {
               onSelectThread={(id) => setActiveThreadId(id)}
               currentUser={currentUser}
               onSendMessage={handleSendMessage}
-              onViewProfile={(user) => setSelectedProfileModal(user)}
+              onViewProfile={handleOpenProfilePage}
             />
           </div>
+        )}
+
+        {activeTab === 'profile' && (
+          <ProfileSection
+            profileUser={viewingProfile}
+            currentUser={currentUser}
+            posts={posts}
+            allPosts={posts}
+            onUpdateProfile={handleUpdateCurrentUser}
+            onNavigateBack={() => setActiveTab(previousTab || 'feed')}
+            onStartChat={handleOpenChatWith}
+            onConnectUser={handleMutualMatch}
+            onAddReview={handleAddReview}
+            onLikePost={handleToggleLikePost}
+            onAddComment={handleAddComment}
+            onCreatePost={handleCreatePost}
+            onSwitchUser={handleSwitchUser}
+          />
         )}
 
         {activeTab === 'settings' && (
@@ -508,16 +551,6 @@ export default function App() {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         unreadChatCount={unreadChatCount}
-      />
-
-      {/* Profile Detail Modal */}
-      <ProfileModal
-        user={selectedProfileModal}
-        currentUser={currentUser}
-        isOpen={!!selectedProfileModal}
-        onClose={() => setSelectedProfileModal(null)}
-        onStartChat={handleOpenChatWith}
-        onAddReview={handleAddReview}
       />
 
       {/* New Post Modal */}

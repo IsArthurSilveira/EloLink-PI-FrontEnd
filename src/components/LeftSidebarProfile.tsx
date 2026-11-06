@@ -194,9 +194,9 @@ export const LeftSidebarProfile: React.FC<LeftSidebarProfileProps> = ({
               <Search className="w-3.5 h-3.5" />
             </button>
             <button
-              onClick={() => alert('Em breve: criar nova comunidade de fundadores!')}
+              onClick={() => setSearchCommunityOpen(true)}
               className="p-1 rounded-lg text-zinc-500 hover:text-emerald-400 transition-colors"
-              title="Criar Comunidade"
+              title="Criar / Buscar Comunidade"
             >
               <Plus className="w-3.5 h-3.5" />
             </button>

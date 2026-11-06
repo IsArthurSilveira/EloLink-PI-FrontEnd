@@ -3,7 +3,6 @@ import { UserProfile, AppNotification } from '../types';
 import { 
   Home, 
   MessageSquare, 
-  Flame, 
   Bell, 
   Calendar, 
   Search, 
@@ -14,10 +13,11 @@ import {
   User, 
   Settings
 } from 'lucide-react';
+import { EloLinkLogoIcon } from './EloLinkLogoIcon';
 
 interface TopNavbarProps {
-  activeTab: 'feed' | 'match' | 'events' | 'chat' | 'settings';
-  setActiveTab: (tab: 'feed' | 'match' | 'events' | 'chat' | 'settings') => void;
+  activeTab: 'feed' | 'match' | 'events' | 'chat' | 'settings' | 'profile';
+  setActiveTab: (tab: 'feed' | 'match' | 'events' | 'chat' | 'settings' | 'profile') => void;
   currentUser: UserProfile;
   onSwitchUser: () => void;
   onLogout: () => void;
@@ -131,7 +131,7 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({
             }`}
             title="Radar de Afinidade (Modo Swipe)"
           >
-            <Flame className="w-5 h-5" />
+            <EloLinkLogoIcon className="w-5 h-5" />
           </button>
 
           {/* Events / Demo Days (Moved to place where Notifications was) */}
@@ -145,6 +145,22 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({
             title="Eventos & Demo Days"
           >
             <Calendar className="w-5 h-5" />
+          </button>
+
+          {/* Profile / Perfil */}
+          <button
+            onClick={() => {
+              onOpenProfile(currentUser);
+              setActiveTab('profile');
+            }}
+            className={`p-2 sm:p-2.5 rounded-xl transition-all ${
+              activeTab === 'profile'
+                ? 'text-purple-400 bg-purple-500/15 shadow-sm'
+                : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/60'
+            }`}
+            title="Meu Perfil Social"
+          >
+            <User className="w-5 h-5" />
           </button>
 
           {/* Settings / Configurações (New Page) */}

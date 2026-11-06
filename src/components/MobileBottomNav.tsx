@@ -1,9 +1,10 @@
 import React from 'react';
-import { Radio, Calendar, MessageSquare, Flame, Settings } from 'lucide-react';
+import { Radio, Calendar, MessageSquare, Settings, User } from 'lucide-react';
+import { EloLinkLogoIcon } from './EloLinkLogoIcon';
 
 interface MobileBottomNavProps {
-  activeTab: 'feed' | 'match' | 'events' | 'chat' | 'settings';
-  setActiveTab: (tab: 'feed' | 'match' | 'events' | 'chat' | 'settings') => void;
+  activeTab: 'feed' | 'match' | 'events' | 'chat' | 'settings' | 'profile';
+  setActiveTab: (tab: 'feed' | 'match' | 'events' | 'chat' | 'settings' | 'profile') => void;
   unreadChatCount: number;
 }
 
@@ -13,10 +14,10 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
   unreadChatCount
 }) => {
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#070913]/95 backdrop-blur-lg border-t border-purple-950/40 px-2 py-2 flex items-center justify-around">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#070913]/95 backdrop-blur-lg border-t border-purple-950/40 px-1 py-2 flex items-center justify-around">
       <button
         onClick={() => setActiveTab('feed')}
-        className={`flex flex-col items-center gap-1 py-1 px-2 rounded-lg text-[10px] font-semibold transition-colors ${
+        className={`flex flex-col items-center gap-1 py-1 px-1.5 rounded-lg text-[10px] font-semibold transition-colors ${
           activeTab === 'feed' ? 'text-purple-400 font-bold' : 'text-zinc-400 hover:text-zinc-200'
         }`}
       >
@@ -26,17 +27,17 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
 
       <button
         onClick={() => setActiveTab('match')}
-        className={`flex flex-col items-center gap-1 py-1 px-2 rounded-lg text-[10px] font-semibold transition-colors ${
+        className={`flex flex-col items-center gap-1 py-1 px-1.5 rounded-lg text-[10px] font-semibold transition-colors ${
           activeTab === 'match' ? 'text-purple-400 font-bold' : 'text-zinc-400 hover:text-zinc-200'
         }`}
       >
-        <Flame className={`w-5 h-5 ${activeTab === 'match' ? 'fill-current text-purple-400' : ''}`} />
+        <EloLinkLogoIcon className="w-5 h-5" />
         <span>Radar</span>
       </button>
 
       <button
         onClick={() => setActiveTab('events')}
-        className={`flex flex-col items-center gap-1 py-1 px-2 rounded-lg text-[10px] font-semibold transition-colors ${
+        className={`flex flex-col items-center gap-1 py-1 px-1.5 rounded-lg text-[10px] font-semibold transition-colors ${
           activeTab === 'events' ? 'text-blue-400 font-bold' : 'text-zinc-400 hover:text-zinc-200'
         }`}
       >
@@ -46,7 +47,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
 
       <button
         onClick={() => setActiveTab('chat')}
-        className={`flex flex-col items-center gap-1 py-1 px-2 rounded-lg text-[10px] font-semibold transition-colors relative ${
+        className={`flex flex-col items-center gap-1 py-1 px-1.5 rounded-lg text-[10px] font-semibold transition-colors relative ${
           activeTab === 'chat' ? 'text-emerald-400 font-bold' : 'text-zinc-400 hover:text-zinc-200'
         }`}
       >
@@ -58,8 +59,18 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
       </button>
 
       <button
+        onClick={() => setActiveTab('profile')}
+        className={`flex flex-col items-center gap-1 py-1 px-1.5 rounded-lg text-[10px] font-semibold transition-colors ${
+          activeTab === 'profile' ? 'text-purple-400 font-bold' : 'text-zinc-400 hover:text-zinc-200'
+        }`}
+      >
+        <User className="w-5 h-5" />
+        <span>Perfil</span>
+      </button>
+
+      <button
         onClick={() => setActiveTab('settings')}
-        className={`flex flex-col items-center gap-1 py-1 px-2 rounded-lg text-[10px] font-semibold transition-colors ${
+        className={`flex flex-col items-center gap-1 py-1 px-1.5 rounded-lg text-[10px] font-semibold transition-colors ${
           activeTab === 'settings' ? 'text-purple-400 font-bold' : 'text-zinc-400 hover:text-zinc-200'
         }`}
       >

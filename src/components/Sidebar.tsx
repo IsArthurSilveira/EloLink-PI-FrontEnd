@@ -2,7 +2,6 @@ import React from 'react';
 import { UserProfile, AppNotification } from '../types';
 import { 
   Radio, 
-  Flame, 
   Calendar, 
   MessageSquare, 
   Bell, 
@@ -11,6 +10,7 @@ import {
   ArrowLeftRight,
   ShieldCheck
 } from 'lucide-react';
+import { EloLinkLogoIcon } from './EloLinkLogoIcon';
 
 interface SidebarProps {
   activeTab: 'feed' | 'match' | 'events' | 'chat';
@@ -165,7 +165,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             }`}
           >
             <div className="flex items-center gap-3">
-              <Flame className={`w-4 h-4 ${activeTab === 'match' ? 'text-purple-400 fill-current' : 'text-purple-400'}`} />
+              <EloLinkLogoIcon className={`w-4 h-4 ${activeTab === 'match' ? 'text-purple-400' : 'text-purple-400'}`} />
               <span>Match Radar</span>
             </div>
             <span className="text-[10px] font-black px-1.5 py-0.5 rounded bg-purple-600/20 text-purple-300 border border-purple-500/30">
